@@ -16,38 +16,5 @@ stages:
     displayName: Build
     pool:
       vmImage: ubuntu-latest
-    steps:
-
-      displayName: Build an image
-      inputs:
-        containerRegistry: 'K8SExamplesACR'
-        repository: '$(imageRepo)'
-        command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/app/Dockerfile'
-        tags: |
-          $(tag)
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(Pipeline.Workspace)/s/kubernetes'
-        artifact: 'manifests'
-        publishLocation: 'pipeline'
-        
-- stage: Deploy
-  displayName: Deploy to Dev
-  dependsOn: Build
-  variables:
-    acrsecret: k8sexamplesacrauth
-    acrdevurl: 'k8sexamplesacr.azurecr.io'
-    replicaNo: 3
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy to AKS
-    environment: 'k8sdev.default'
-    pool: 
-      vmImage: ubuntu-latest
-    strategy:
-      runOnce:
-        deploy:
-          steps:
 
 
