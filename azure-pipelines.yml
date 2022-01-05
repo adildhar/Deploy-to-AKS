@@ -52,14 +52,6 @@ stages:
           targetPath: '$(Pipeline.Workspace)/manifest'
       - task: KubernetesManifest@0
         inputs:
-          action: 'createSecret'
-          kubernetesServiceConnection: 'devkbrntsclus1'
-          namespace: 'default'
-          secretType: 'dockerRegistry'
-          secretName: '$acrsecret'
-          dockerRegistryEndpoint: 'kbrntsregistery1'
-      - task: KubernetesManifest@0
-        inputs:
           action: 'deploy'
           kubernetesServiceConnection: 'devkbrntsclus1'
           namespace: 'default'
