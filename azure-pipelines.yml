@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  ImageRepo: sampleapp
+  imageRepo: sampleapp
   tag: '$(Build.BuildId)'
 
 stages:
@@ -25,7 +25,7 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'kbrntsregistery1'
-        repository: '$ImageRepo'
+        repository: '$imageRepo'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/app/Dockerfile'
         tags: |
